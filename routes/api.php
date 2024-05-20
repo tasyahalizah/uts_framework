@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +17,15 @@ use Illuminate\Support\Facades\Route;
 //Panggil ProductController Sebagai Object
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\UserCT;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GoogleAuthController;
+
+
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect']);
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callbackGoogle']);
 
 Route::middleware(['jwt-auth'])->group(function () {
     //Buat route untuk menambahkan data produk
